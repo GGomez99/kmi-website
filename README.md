@@ -5,9 +5,21 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 I made a website for K-MI! with those features :
 - Animated homepage
 - Invite page to the discord server
-- Minecraft server related page (In progress)
+- Minecraft server related page
   - Stats of the players 
   - Server status
+
+## Needed React modules
+
+`react-bootstrap`
+
+`react-select`
+
+`react-iframe`
+
+`react-sidenav`
+
+`react-router-dom`
 
 ## Available Scripts
 
