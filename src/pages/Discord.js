@@ -12,7 +12,7 @@ import "../App.css"
 function Discord() {
     return (
         <Base bgs={[kon4]}>
-            <Row style={{height:"20em"}}>
+            <Row style={{height:"50%"}}>
                 <Col style={{textAlign: "right"}}>
                     <h1>Join our Discord !</h1>
                     <p>We won't bite you :3</p>
