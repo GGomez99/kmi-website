@@ -59,8 +59,13 @@ class Minecraft extends React.Component {
                     value: objective.Name,
                     label: objective.DisplayName.slice(9, -2),
                 })
-
             )
+
+            objectives.sort(function(a, b){
+                if(a.label < b.label) { return -1; }
+                if(a.label > b.label) { return 1; }
+                return 0;
+            })
 
             this.setState({
                 minecraftObjectives: objectives,
@@ -86,9 +91,9 @@ class Minecraft extends React.Component {
                 
                 if (dataUnit.Objective == objName) {
                     if (dataUnit.Name in dataByPlayers) {
-                        dataByPlayers[dataUnit.Name].push(dataUnit.Score)
+                        dataByPlayers[dataUnit.Name].push({date: day.date, value: dataUnit.Score})
                     } else {
-                        dataByPlayers[dataUnit.Name] = [dataUnit.Score]
+                        dataByPlayers[dataUnit.Name] = [{date: day.date, value: dataUnit.Score}]
                     }
                 }
             })
@@ -99,7 +104,7 @@ class Minecraft extends React.Component {
         for (let [name, values] of Object.entries(dataByPlayers)) {
             let newDataPoints = [];
             for (let i = 0; i < values.length; i++) {
-                newDataPoints.push({x: new Date(dateBegin.valueOf() + 1000*3600*24*i), y: values[i]})
+                newDataPoints.push({x: new Date(values[i].date), y: values[i].value})
             }
             newData.push({
                 name: name,
@@ -116,7 +121,8 @@ class Minecraft extends React.Component {
             theme: "dark2",
             toolTip: {
                 content: "{name} : {y}",
-                shared: this.state.doShare
+                shared: this.state.doShare,
+                contentFormatter: null
             },
             title:{
                 text: objDispName
@@ -124,9 +130,13 @@ class Minecraft extends React.Component {
             axisY: {
                 title: objDispName,
                 includeZero: false,
+                titleFontSize: 20,
+                labelFontSize: 15,
             },
             axisX: {
                 title: "Past days",
+                titleFontSize: 20,
+                labelFontSize: 15,
             },
             data: newData
         }
@@ -138,7 +148,6 @@ class Minecraft extends React.Component {
     }
 
     onKeyPressed = (event) => {
-        console.log(event.key)
         if(event.key === 'Shift'){
             this.setState({
                 options: {
@@ -146,7 +155,24 @@ class Minecraft extends React.Component {
                     theme: "dark2",
                     toolTip: {
                         content: this.state.options.toolTip.shared ? "{name} : {y}" : null,
-                        shared: !this.state.options.toolTip.shared
+                        shared: !this.state.options.toolTip.shared,
+                        contentFormatter: this.state.options.toolTip.shared ? null : function(e){
+                            const datePoint = e.entries[0].dataPoint.x;
+                            let str = datePoint.toLocaleDateString('en-GB') + "<br/>"
+
+                            let values = e.entries.slice();
+                            values.sort((a, b) => {
+                                if(a.dataPoint.y > b.dataPoint.y) { return -1; }
+                                if(a.dataPoint.y < b.dataPoint.y) { return 1; }
+                                return 0;
+                            })
+
+                            for (let i = 0; i < e.entries.length; i++){
+                                let  temp = "<font style='color:" + values[i].dataSeries._colorSet[0] + "'>" + values[i].dataSeries.name + ": </font> "+  values[i].dataPoint.y + "<br/>" ; 
+                                str = str.concat(temp);
+                            }
+                            return (str);
+                          }
                     },
                     title:{
                         text: this.state.options.axisY.title
@@ -172,13 +198,13 @@ class Minecraft extends React.Component {
                 tabIndex="0"
             >
             <Base bgs={[minecraftBG]} onKeyPress={this.handleKeyPress}>
-                <div style={{width: "70%"}}>
+                <div style={{width: "70%", height: "70%"}}>
                 <Row>
                     <Col>
                     <h1 style={{marginBottom: "100xp"}}>Stats from K-MI! Minecraft Server</h1>                
                     </Col>
                 </Row>
-                <Row>
+                <Row style={{height:"90%"}}>
                     <Col xs={2} style={{color: "black"}}>
                         <h5 style={{color: "white"}}>Select a stat</h5>
                         <Select
@@ -190,7 +216,7 @@ class Minecraft extends React.Component {
                         <p style={{color: "lightGrey", marginTop: "1em"}}>Press shift to change the tooltip</p>
                     </Col>
                     <Col>
-                        <CanvasJSChart options = {this.state.options}/>
+                        <CanvasJSChart options = {this.state.options} />
                     </Col>
                     
                     
