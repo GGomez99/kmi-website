@@ -37,7 +37,7 @@ class Base extends React.Component {
                     }}>
                     </div>
                 )}
-                <div>
+                <div className="BG">
                     {this.props.children}
                 </div>
             </Row>

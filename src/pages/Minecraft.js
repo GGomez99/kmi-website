@@ -5,8 +5,6 @@ import minecraftBG from '../resources/minecraftBG.webp'
 
 import "../App.css"
 
-import ReactDOM from 'react-dom'
-
 import Select from 'react-select'
 
 import {Col, Row, Button} from 'react-bootstrap'
@@ -173,13 +171,14 @@ class Minecraft extends React.Component {
                 onKeyDown={this.onKeyPressed}
                 tabIndex="0"
             >
-            <Base bgs={[minecraftBG]} onKeyPress={this.handleKeyPress}> 
+            <Base bgs={[minecraftBG]} onKeyPress={this.handleKeyPress}>
+                <div style={{width: "70%"}}>
                 <Row>
                     <Col>
                     <h1 style={{marginBottom: "100xp"}}>Stats from K-MI! Minecraft Server</h1>                
                     </Col>
                 </Row>
-                <Row style={{width: "60em"}}>
+                <Row>
                     <Col xs={2} style={{color: "black"}}>
                         <h5 style={{color: "white"}}>Select a stat</h5>
                         <Select
@@ -188,6 +187,7 @@ class Minecraft extends React.Component {
                             isSearchable={true}
                             options={this.state.minecraftObjectives}
                         />
+                        <p style={{color: "lightGrey", marginTop: "1em"}}>Press shift to change the tooltip</p>
                     </Col>
                     <Col>
                         <CanvasJSChart options = {this.state.options}/>
@@ -195,6 +195,7 @@ class Minecraft extends React.Component {
                     
                     
                 </Row>
+                </div>
             </Base>
             </div>
         )
