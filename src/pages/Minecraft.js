@@ -180,9 +180,13 @@ class Minecraft extends React.Component {
                     axisY: {
                         title: this.state.options.axisY.title,
                         includeZero: false,
+                        titleFontSize: 20,
+                        labelFontSize: 15,
                     },
                     axisX: {
                         title: "Past days",
+                        titleFontSize: 20,
+                        labelFontSize: 15,
                     },
                     data: this.state.options.data
             }
