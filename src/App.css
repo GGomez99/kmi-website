@@ -30,6 +30,17 @@
     width: 100%
 }
 
+.Menu {
+    opacity: 1;
+    background-color: #18191a;
+}
+
+@media (max-width:700px){
+    .Menu {
+        background: #18191a00;
+    }
+}
+
 /*
 Change h1 style
 change width for menu

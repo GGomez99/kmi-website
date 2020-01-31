@@ -8,7 +8,9 @@ import minecraftLogo from '../resources/minecraft.svg';
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 
 // Be sure to include styles at some point, probably during your bootstraping
+import '../App.css';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
+
 
 
 let SideMenu = (props) => 
@@ -19,9 +21,8 @@ let SideMenu = (props) =>
                         props.routHistory.push(to);
                     }
                 }}
-                style={{
-                    background: "#18191a",
-                }}
+                className="Menu"
+                style={{background: "#18191a"}}
             >
                 <SideNav.Toggle />
                 <SideNav.Nav defaultSelected="home">
@@ -48,16 +49,6 @@ let SideMenu = (props) =>
                         <NavText style={{paddingLeft: "5em"}}>
                             Minecraft
                         </NavText>
-                        <NavItem eventKey="minecraft/stats">
-                            <NavText>
-                                Stats
-                            </NavText>
-                        </NavItem>
-                        <NavItem eventKey="minecraft/status">
-                            <NavText>
-                                Server Status
-                            </NavText>
-                        </NavItem>
                     </NavItem>
                 </SideNav.Nav>
             </SideNav>

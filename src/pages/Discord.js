@@ -3,7 +3,7 @@ import Base from '../components/Base.js'
 import kon4 from '../resources/kon4.webp'
 import kmi from '../resources/kmi-logo.png'
 
-import {Col, Button, Row} from 'react-bootstrap'
+import {Col, Row} from 'react-bootstrap'
 
 import Iframe from 'react-iframe'
 
@@ -25,6 +25,7 @@ function Discord() {
                     position="relative"
                     frameBorder="0"
                 />
+                
             </Row>
         </Base>
     )
