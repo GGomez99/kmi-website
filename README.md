@@ -1,6 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Website for my Discord server K-MI!
+You can check it out at http://uc.kyrandia.org/
 
 I made a website for K-MI! with those features :
 - Animated homepage
